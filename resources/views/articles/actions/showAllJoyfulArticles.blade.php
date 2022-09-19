@@ -66,7 +66,7 @@ a {
 }
 </style>
 
-<x-pop-up/>
+<x-Popup/>
 <nav class="navbar sticky-top navbar-light container container-fluid" style="background-color:white;">
   <a class="navbar-brand"
           style="font-family: 'Anton'; font-size: 32px;"

@@ -1,17 +1,15 @@
 @extends ('layouts.app')
 <!-- make title unqique to article -->
 <!--  TODO: this view needs to be styled for all view sizes -->
-@section('title', 'Blog')
+@section('title', 'Recommended Stem Books')
 @section ('content')
 
 <!-- | Styles for this file -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
 .col-lg  {
-    /* font-family: 'Raleway', 'Roboto'; */
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 26px;
-
 }
 .col-md {
     font-family: Verdana;
@@ -44,7 +42,7 @@ a:visited {
     text-decoration: none;
 }
 a {
-    color: black;
+  color: grey;
 }
 img {
     border-radius : 7%;
@@ -63,13 +61,11 @@ p {
     padding : auto;
     margin : auto;
 }
-/* master style for the slab here */
-/* secondary style for slab here */
-/* third style-choice for slab here */
-/* fourth style-choice for slab here */
+a {
+  color: black;
+}
 </style>
 
-    <!--  TODO: place all styles within separate dir. -->
 <x-Popup/>
 <nav class="navbar sticky-top navbar-light container container-fluid" style="background-color:white;">
   <a class="navbar-brand"
@@ -79,55 +75,47 @@ p {
 </nav>
 
     <div class="row">
-        <h1 class="col-lg text-center mt-5">Human Articles</h1>
+        <h1 class="col-lg text-center mt-5">Keeping up with BeingHMN</h1>
     </div>
-
     <div class="row">
         <div class="col-lg text-center mb-5"
-             style="padding-bottom: 40px;"
-        >
-            <h2>The Latest Articles From Being Human</h2>
+             style="padding-bottom: 40px;">
+             <h2>Recommended Stem Book's</h2>
         </div>
     </div>
-
     <div class="mt-4 row card card-articles add-whitespace">
         <div class="col-lg-12 mt-2 container add-whitespace">
             <div class="container">
-              <div class="row text-center">
-                    <h2 id="article-type" class="col-lg mt-3">
-                            Human
-                    </h2>
-               </div>
-               @if($humanArticles)
-                    @foreach($humanArticles as $human)
-                     <div class="row text-center mt-5">
-                         <div class="col-lg-6 col-sm-12">
-                             <h3 id="title">
-                                 <a href="/humanArticle/{{ $human->id ?? '' }}">
-                                     {{ $human->title ?? ''}}
-                                 </a>
-                             </h3>
-                             <p style="color: grey; font-size: 15px;">
-                                 {{ $human->excerpt }}
-                             </p>
-                         </div>
-                         <div class="col-lg-6 col-sm-12 mb-3">
-                            <a href="/humanArticle/{{ $human->id ?? '' }}">
-                                 <img src="{{ $human->image_name }}" alt="main-article-image" height="95%;" width="85%;">
+                <div class="row text-center">
+                    <h1 id="article-type" class="col-lg mt-3">
+                    The Latest Reviews
+                    </h1>
+                </div>
+                @if(isset($stemArticles))
+                    @foreach($stemArticles as $article)
+                    <div class="row text-center mt-5">
+                        <div class="col-lg-6 col-sm-12">
+                            <h3 id="title">
+                                <a href="/stem/{{ $article->id ?? '' }}">
+                                    {{ $article->title ?? ''}}
+                                </a>
+                            </h3>
+                            <p style="color: grey; font-size: 15px;">
+                                {{ $article->excerpt }}
+                            </p>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 mb-3">
+                            <a href="/stem/{{ $article->id ?? '' }}">
+                                <img src="{{ $article->image_name }}" alt="main-article-image" height="95%;" width="85%;">
                             </a>
-                         </div>
-                     </div>
-                        <hr style="color:grey;" width="100%">
+                        </div>
+                    </div>
+                    <hr style="color:grey;" width="100%">
                     @endforeach
-                @endif
-                @if($humanArticles->isEmpty())
-                    <p class="text-center m-3 mb-5">Sorry, Articles Coming Soon!</p>
                 @endif
             </div>
         </div>
     </div>
-
-
 
 <!-- Warning : Alot of the code below may not be in-use currently -->
 <script type="text/javascript">
@@ -138,7 +126,7 @@ p {
     let g = document.getElementById('guides');
     let b = document.getElementById('baby');
     let k = document.getElementById('kids');
-    let h = document.getElementById('human');
+    let h = document.getElementById('health');
     // - will use these in the hiding of divs
     let po = document.getElementById('po');
     let re = document.getElementById('re');
@@ -279,8 +267,8 @@ let count = 0;
         }
     }
     h.onclick = () => {
-        document.getElementById('article-type').innerHTML = 'human articles';
-        document.getElementById('discription-type').innerHTML = 'Read the latest human articles';
+        document.getElementById('article-type').innerHTML = 'Health articles';
+        document.getElementById('discription-type').innerHTML = 'Read the latest Health articles';
         aac(h);
 // - show div with articles
         sdwa(he);

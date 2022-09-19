@@ -224,7 +224,7 @@ h2 {
   width: 0%;
 }
 </style>
-<x-pop-up/>
+<x-Popup/>
 <nav class="navbar sticky-top navbar-light container container-fluid" style="background-color:white;">
 
   <strong class="navbar-brand"
