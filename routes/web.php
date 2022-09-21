@@ -10,16 +10,15 @@ use App\Http\Controllers\RecommendedReadingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\UsersController;
 // use App\Http\Controllers\ProductsController; // remove after store work has been completed
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomAuthController;
 
+// SUBSCRIPTION ROUTES ( COMMUNICATED WITH MAILCHIMP )
 Route::post('newsletter', function(){
     request()->validate(['email' => 'required|email']);
     $mailchimp = new \MailchimpMarketing\ApiClient();
@@ -43,46 +42,26 @@ Route::post('newsletter', function(){
     }
     return redirect('/')->with('success', 'You are now signed up for our newsletter');
 });
+// END OF SUBSCRIPTION RELATED ROUTES
 
 
+Route::get('/', function () {
+    return view('welcome');
+});
 /*
 |-----------------------------------------------------------------
 |  Admin + Auth related routes
 |-----------------------------------------------------------------
 */
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
+
+// AUTH/ADMIN RELATED ROUTES
 Route::get('dashboard', [SessionsController::class, 'dashboard'])->middleware('auth');
 
-// REGISTER USER ROUTES ( Guest can reach these urls )
-Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
-
-
-
-// may use this later ( below is on hold )
-// Only guest are allowed to this page.
-// Route::get('register', [RegisterController::class, 'create'])->middleware('guest'); // inspect request for user type -> user vs guest.
-// Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
-
-// // Route::get('/dashboard', function (){
-// //     return view('dashboard');
-// // })->middleware(['auth', 'verified']);
-
-// // LoginController related routes.
-// Route::get('login-page', [LoginController::class, 'show'])->name('login-page'); // navigate to login page.
-// Route::get('login', [LoginController::class, 'authenticateAndLoginUser'])->middleware('auth');;
-
-// // Session Controller related routes.
-// Route::post('logout', [SessionsController::class, 'destroy']); // logout the session.
-
-
-
-/*
-|----------------------------------------------------------------
-| Home | Welcome Route
-|----------------------------------------------------------------
-*/
-Route::get('/', [HomeController::class, 'index']);
 
 /*
 |-----------------------------------------------------------------

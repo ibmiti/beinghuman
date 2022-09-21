@@ -1,5 +1,5 @@
 @extends ('layouts.app')
-@section('title', 'Welcome Home')
+@section('title', 'Welcome Dashboard')
 @section('content')
 <div id="wrapper">
     <!-- Main -->
@@ -144,7 +144,7 @@
                 </header>
                 <ul>
                     @auth
-                        <form method="get" action="{{ url('logout') }}">
+                        <form method="POST" action="{{ url('logout') }}">
                         @csrf
                             <button class="btn btn-default btn-xs" type="submit">Logout</button>
                         </form>
@@ -156,14 +156,14 @@
                                 <li class="btn btn-default btn-xs"><a href="{{ url('dashboard') }}">Admin Dashboard</a></li>
                             @endif
                     @endauth
-                    <!-- <li><a href="/">Homepage</a></li> -->
+                    <!-- <li><a href="/">Dashboardpage</a></li> -->
                     <li><a href="/about">About BeingHMN</a></li>
                     <li><a href="{{ url('recommended-reads') }}">Recommended Reads</a></li>
                     @guest
-                         <li><a href="{{ url('login-page') }}" class="logo"><strong>Login</strong></a></li>
+                         <li><a href="{{ url('login') }}" class="logo"><strong>Login</strong></a></li>
                          <li><a href="{{ url('register') }}" class="logo"><strong>Register</strong></a></li>
                          <li><a href="#newsletter" class="logo"><strong>Subscribe</strong></a></li>
-                     @endguest
+                    @endguest
                     <!-- <li>
                         <span class="opener">Submenu</span>
                         <ul>

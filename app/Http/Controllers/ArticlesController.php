@@ -94,6 +94,7 @@ class ArticlesController extends Controller
     public function confirmAndCreateArticle(Request $request)
     {
 
+
         // Validating Request
         $this->validate($request, [
             'author'       => 'required|string|max:100|min:4',
